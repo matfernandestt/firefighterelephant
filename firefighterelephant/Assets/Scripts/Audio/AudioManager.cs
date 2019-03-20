@@ -1,53 +1,38 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum SoundTypes { SFX, Music };
-
 public class AudioManager : MonoBehaviour
 {
-
     [SerializeField] private AudioSource srcBaseSFX;
     [SerializeField] private AudioSource srcBaseMusic;
 
-    [SerializeField] private SoundSet[] soundSet;
+    [SerializeField] private List<AudioSource> AudioSourceList = new List<AudioSource>();
 
-    private void Awake()
+    public void PlaySound(SoundTypes type, AudioClip clip, bool loop = false, float pitch = 1f)
     {
-        for (var i = 0; i < soundSet.Length; i++)
+        AudioSource src = new AudioSource();
+        switch(type)
         {
-            var newSRC = Instantiate(srcBaseMusic, transform);
-            newSRC.clip = soundSet[i].clip;
-            newSRC.loop = soundSet[i].loop;
-            newSRC.pitch = soundSet[i].pitch;
-            if(soundSet[i].stop)
-                newSRC.Stop();
-            else
-                newSRC.Play();
+            case SoundTypes.Music:
+                src = Instantiate(srcBaseMusic, transform);
+                break;
+            case SoundTypes.SFX:
+                src = Instantiate(srcBaseSFX, transform);
+                break;
         }
-        for (var i = 0; i < soundSet.Length; i++)
-        {
-            var newSRC = Instantiate(srcBaseSFX, transform);
-            newSRC.clip = soundSet[i].clip;
-            newSRC.loop = soundSet[i].loop;
-            newSRC.pitch = soundSet[i].pitch;
-        }
+        src.clip = clip;
+        src.loop = loop;
+        src.pitch = pitch;
+        src.Play();
+        if (!loop)
+            Destroy(src.gameObject, clip.length);
+        else
+            AudioSourceList.Add(src);
     }
 
-    public void PlaySound()
+    private void Start()
     {
-
+        PlaySound(SoundTypes.SFX, Sounds.library.genericSFX);
     }
-}
-
-[Serializable]
-public class SoundSet
-{
-    public SoundEvent eventType;
-    public SoundTypes soundType;
-    public AudioClip clip;
-    [Range(-3, 3)] public float pitch = 1;
-    public bool loop;
-    public bool stop;
 }
