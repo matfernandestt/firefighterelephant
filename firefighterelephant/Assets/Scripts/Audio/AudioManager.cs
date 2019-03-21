@@ -33,6 +33,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySound(SoundTypes.SFX, Sounds.library.genericSFX);
+        PlaySound(SoundTypes.Music, Sounds.library.genericBGM);
     }
 }
