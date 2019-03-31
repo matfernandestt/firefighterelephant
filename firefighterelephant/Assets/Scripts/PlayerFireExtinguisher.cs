@@ -34,8 +34,8 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	{
 		var origin = SpawnPoint.position;
 
-		var hit = Physics2D.Raycast(origin, Vector2.right * ExtinguisherRange, FireLayerMask);
-		Debug.DrawRay(origin, Vector2.right * ExtinguisherRange, Color.red);
+		var hit = Physics2D.Raycast(origin, transform.right * ExtinguisherRange, FireLayerMask);
+		Debug.DrawRay(origin, transform.right * ExtinguisherRange, Color.red);
 
 		if (hit)
 		{
