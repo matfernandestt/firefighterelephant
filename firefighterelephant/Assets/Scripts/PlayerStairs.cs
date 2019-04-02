@@ -13,8 +13,14 @@ public class PlayerStairs : MonoBehaviour
 {
 	public LayerMask StairLayerMask;
 
+	private CameraController cameraController;
 	private Stair actualStair;
 	private bool inFrontOfAStair;
+
+	private void Start()
+	{
+		cameraController = FindObjectOfType<CameraController>();
+	}
 
 	private void OnEnable()
 	{
@@ -76,6 +82,7 @@ public class PlayerStairs : MonoBehaviour
 				if (upStair != null)
 				{
 					transform.position = upStair.transform.position;
+					cameraController.ChangeFocus(upStair.transform.parent);
 				}
 
 				break;
@@ -85,6 +92,7 @@ public class PlayerStairs : MonoBehaviour
 				if (downStair != null)
 				{
 					transform.position = downStair.transform.position;
+					cameraController.ChangeFocus(downStair.transform.parent);
 				}
 
 				break;

@@ -3,9 +3,10 @@
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
+	public static Vector3 Velocity;
+
 	public float MoveSpeed;
 
-	private Vector3 velocity;
 	private float gravity = -20f;
 	private PlayerMovement movement;
 	private Vector3 input;
@@ -19,8 +20,8 @@ public class Player : MonoBehaviour
 	{
 		input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-		velocity.x = input.x * MoveSpeed;
-		velocity.y += gravity * Time.deltaTime;
-		movement.Move(velocity * Time.deltaTime);
+		Velocity.x = input.x * MoveSpeed;
+		Velocity.y += gravity * Time.deltaTime;
+		movement.Move(Velocity * Time.deltaTime);
 	}
 }
