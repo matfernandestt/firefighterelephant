@@ -20,7 +20,6 @@ public class PlayerDoor : MonoBehaviour
 
 	private void OpenDoor()
 	{
-
 		if (!CheckForDoor())
 			return;
 
@@ -30,7 +29,6 @@ public class PlayerDoor : MonoBehaviour
 		Player.Velocity = Vector3.zero;
 
 		transform.position = doorTransform.position;
-		transform.rotation = doorTransform.rotation;
 	}
 
 	private bool CheckForDoor()

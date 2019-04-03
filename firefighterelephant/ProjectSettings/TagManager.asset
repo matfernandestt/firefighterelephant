@@ -18,7 +18,7 @@ TagManager:
   - Ground
   - Stair
   - Door
-  - 
+  - SafeZone
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Smoke
+    uniqueID: 4248306723
+    locked: 0
+  - name: FireIn
+    uniqueID: 4206691389
+    locked: 0
+  - name: Fire
+    uniqueID: 3617583733
+    locked: 0
+  - name: Extinguisher
+    uniqueID: 1474476751
+    locked: 0
+  - name: ExplosionSmoke
+    uniqueID: 2072975227
+    locked: 0
+  - name: Explosion
+    uniqueID: 3066463161
     locked: 0

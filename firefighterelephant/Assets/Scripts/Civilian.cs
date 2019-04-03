@@ -1,123 +1,86 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class Civilian : MonoBehaviour
 {
-	public LayerMask CollisionMask;
-	public float SkinWidth = .015f;
-	public int HorizontalRayCount = 4;
-	public int VerticalRayCount = 4;
-	public float MoveSpeed;
+	private bool canMove;
+	private bool safe;
+	private Vector3 translation;
+	private Player player;
 
-	private float gravity = -20f;
-	private float horizontalRaySpacing;
-	private float verticalRaySpacing;
-	private BoxCollider2D collider;
-	private RaycastOrigins raycastOrigins;
-	private Vector3 velocity;
+	public float Speed;
+	public float RaycastDistance;
+	public float SavingDistance;
+	public float MinimumPlayerDistance;
+	public LayerMask PlayerLayerMask;
+	public LayerMask SafeZoneLayerMask;
 
 	private void Start()
 	{
-		collider = GetComponent<BoxCollider2D>();
-
-		CalculateRaySpacing();
+		player = FindObjectOfType<Player>();
 	}
 
 	private void Update()
 	{
-		//velocity.x = input.x * MoveSpeed;
-		//velocity.y += gravity * Time.deltaTime;
-		//Move(velocity * Time.deltaTime);
-	}
+		if (safe)
+			return;
 
-	public void Move(Vector3 velocity)
-	{
-		UpdateRaycastOrigins();
-
-		if (velocity.x != 0)
+		if (!canMove)
 		{
-			HorizontalCollisions(ref velocity);
-		}
-
-		if (velocity.y != 0)
-		{
-			VerticalCollisions(ref velocity);
-		}
-
-		transform.Translate(velocity);
-	}
-
-	public void HorizontalCollisions(ref Vector3 velocity)
-	{
-		float directionX = Mathf.Sign(velocity.x);
-		float rayLength = Mathf.Abs(velocity.x) + SkinWidth;
-
-		for (int i = 0; i < HorizontalRayCount; i++)
-		{
-			Vector2 rayOrigin = (directionX == -1f) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-			rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, CollisionMask);
-
-			Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
-
-			if (hit)
+			if (Physics2D.Raycast(transform.position, Vector2.right, SavingDistance, PlayerLayerMask))
 			{
-				velocity.x = (hit.distance - SkinWidth) * directionX;
-				rayLength = hit.distance;
+				canMove = true;
+				PlayerInput.KickDoorButtonDown += EnterDoor;
+				PlayerInput.UpStairsButtonDown += EnterDoor;
+				PlayerInput.DownStairsButtonDown += EnterDoor;
+			}
+
+			return;
+		}
+
+		var hit = Physics2D.Raycast(transform.position, Vector2.down, 2, SafeZoneLayerMask);
+
+		if (hit)
+		{
+			SafeZone safeZone = hit.transform.GetComponent<SafeZone>();
+
+			if (safeZone != null)
+			{
+				safe = true;
+				PlayerInput.KickDoorButtonDown -= EnterDoor;
+				PlayerInput.UpStairsButtonDown -= EnterDoor;
+				PlayerInput.DownStairsButtonDown -= EnterDoor;
 			}
 		}
-	}
 
-	public void VerticalCollisions(ref Vector3 velocity)
-	{
-		float directionY = Mathf.Sign(velocity.y);
-		float rayLength = Mathf.Abs(velocity.y) + SkinWidth;
-
-		for (int i = 0; i < VerticalRayCount; i++)
+		if (Vector2.Distance(transform.position, player.transform.position) > MinimumPlayerDistance)
 		{
-			Vector2 rayOrigin = (directionY == -1f) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
-			rayOrigin += Vector2.right * (verticalRaySpacing * i * velocity.x);
-
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, CollisionMask);
-
-			Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
-
-			if (hit)
+			if (Physics2D.Raycast(transform.position, Vector2.right, RaycastDistance, PlayerLayerMask))
 			{
-				velocity.y = (hit.distance - SkinWidth) * directionY;
-				rayLength = hit.distance;
+				translation = Vector2.right * Speed * Time.deltaTime;
+				transform.Translate(translation);
+			}
+			else if (Physics2D.Raycast(transform.position, Vector2.left, RaycastDistance, PlayerLayerMask))
+			{
+				translation = Vector2.left * Speed * Time.deltaTime;
+				transform.Translate(translation);
 			}
 		}
+
+		var position = transform.position;
+		Debug.DrawRay(position, Vector2.right * RaycastDistance, Color.red);
+		Debug.DrawRay(position, Vector2.left * RaycastDistance, Color.red);
 	}
 
-	private void UpdateRaycastOrigins()
+	private void EnterDoor()
 	{
-		Bounds bounds = collider.bounds;
-		bounds.Expand(SkinWidth * -2); //Negativo para que a expansão seja para dentro.
-
-		raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
-		raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-		raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
-		raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
+		transform.position = player.transform.position;
 	}
 
-	private void CalculateRaySpacing()
+	private void OnDisable()
 	{
-		Bounds bounds = collider.bounds;
-		bounds.Expand(SkinWidth * -2);
-
-		HorizontalRayCount = Mathf.Clamp(HorizontalRayCount, 2, int.MaxValue);
-		VerticalRayCount = Mathf.Clamp(VerticalRayCount, 2, int.MaxValue);
-
-		horizontalRaySpacing = bounds.size.y / (HorizontalRayCount - 1); //-1 porque ele conta apenas os espaços entre os raios.
-		verticalRaySpacing = bounds.size.x / (VerticalRayCount - 1);
-	}
-
-	private struct RaycastOrigins
-	{
-		public Vector2 topLeft, topRight, bottomLeft, bottomRight;
+		PlayerInput.KickDoorButtonDown -= EnterDoor;
+		PlayerInput.UpStairsButtonDown -= EnterDoor;
+		PlayerInput.DownStairsButtonDown -= EnterDoor;
 	}
 }
