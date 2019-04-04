@@ -10,4 +10,10 @@ public enum FireType
 public class Fire : MonoBehaviour
 {
 	public FireType Type;
+	public GameObject ExplosionParticle;
+
+	public void Explode()
+	{
+		Instantiate(ExplosionParticle, transform.position, ExplosionParticle.transform.rotation, transform);
+	}
 }

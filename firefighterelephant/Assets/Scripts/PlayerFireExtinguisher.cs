@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,20 +10,31 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	public Transform SpawnPoint;
 	public float ExtinguisherRange;
 
-	private FireType actualExtinguisherType;
+	[Header("Particles")]
+	public GameObject ExtinguisherParticleA;
+	public GameObject ExtinguisherParticleB;
+	public GameObject ExtinguisherParticleC;
+	public Transform ParticleParent;
 
-    private int _dir = 1;
+	private FireType actualExtinguisherType;
+	private GameObject actualExtinguisherParticle;
+
+	private int direction = 1;
 
 	#region Delegates
 	private void OnEnable()
 	{
-		PlayerInput.FireExtinguisherButtonDown += Shoot;
+		PlayerInput.FireExtinguisherButtonUp += EndParticle;
+		PlayerInput.FireExtinguisherButtonDown += ReleaseParticle;
+		PlayerInput.FireExtinguisherButtonHold += Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown += SwitchExtinguisher;
 	}
 
 	private void OnDisable()
 	{
-		PlayerInput.FireExtinguisherButtonDown -= Shoot;
+		PlayerInput.FireExtinguisherButtonUp -= EndParticle;
+		PlayerInput.FireExtinguisherButtonDown -= ReleaseParticle;
+		PlayerInput.FireExtinguisherButtonHold -= Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown -= SwitchExtinguisher;
 	}
 	#endregion
@@ -36,19 +48,19 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	{
 		var origin = SpawnPoint.localPosition;
 
-        if (Player.Velocity.x > 0)
-            _dir = 1;
-        if(Player.Velocity.x < 0)
-            _dir = -1;
+		if (Player.Velocity.x > 0)
+			direction = 1;
+		if (Player.Velocity.x < 0)
+			direction = -1;
 
-        origin = new Vector3(transform.position.x + origin.x * _dir, SpawnPoint.position.y, SpawnPoint.position.z);
+		origin = new Vector3(transform.position.x + origin.x * direction, SpawnPoint.position.y, SpawnPoint.position.z);
 
-        var hit = Physics2D.Raycast(origin, (transform.right * _dir) * ExtinguisherRange, FireLayerMask);
-		Debug.DrawRay(origin, (transform.right * _dir) * ExtinguisherRange, Color.red);
+		var hit = Physics2D.Raycast(origin, (transform.right * direction) * ExtinguisherRange, FireLayerMask.value);
+		Debug.DrawRay(origin, (transform.right * direction) * ExtinguisherRange, Color.red);
 
 		if (hit)
 		{
-			var fire = hit.transform.GetComponent<Fire>();
+			var fire = hit.collider.GetComponent<Fire>();
 
 			if (fire != null)
 			{
@@ -58,10 +70,39 @@ public class PlayerFireExtinguisher : MonoBehaviour
 				}
 				else
 				{
-					Explode();
+					fire.Explode();
 				}
 			}
 		}
+	}
+
+	private void ReleaseParticle()
+	{
+		switch (actualExtinguisherType)
+		{
+			case FireType.A:
+				InstantiateParticle(ExtinguisherParticleA);
+				break;
+			case FireType.B:
+				InstantiateParticle(ExtinguisherParticleB);
+				break;
+			case FireType.C:
+				InstantiateParticle(ExtinguisherParticleC);
+				break;
+			default:
+				Debug.LogError("Extinguisher not found!");
+				throw new ArgumentOutOfRangeException();
+		}
+	}
+
+	private void InstantiateParticle(GameObject particle)
+	{
+		actualExtinguisherParticle = Instantiate(particle, SpawnPoint.position, particle.transform.rotation, ParticleParent);
+	}
+
+	private void EndParticle()
+	{
+		Destroy(actualExtinguisherParticle);
 	}
 
 	private void ExtinguishFire()
@@ -69,14 +110,9 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		Debug.Log("Extinguish");
 	}
 
-	private void Explode()
-	{
-		Debug.Log("Explode");
-	}
-
 	private void SwitchExtinguisher()
 	{
-		actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType++ : FireType.A;
+		actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType + 1 : FireType.A;
 		Debug.Log("Changed to " + actualExtinguisherType);
 	}
 }

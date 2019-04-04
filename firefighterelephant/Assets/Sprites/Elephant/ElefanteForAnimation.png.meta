@@ -1,0 +1,405 @@
+fileFormatVersion: 2
+guid: 20142f3a44657a141831f9da4205cead
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ElefanteForAnimation_0
+    21300002: ElefanteForAnimation_1
+    21300004: ElefanteForAnimation_2
+    21300006: ElefanteForAnimation_3
+    21300008: ElefanteForAnimation_4
+    21300010: ElefanteForAnimation_5
+    21300012: ElefanteForAnimation_6
+    21300014: ElefanteForAnimation_7
+    21300016: ElefanteForAnimation_8
+    21300018: ElefanteForAnimation_9
+    21300020: ElefanteForAnimation_10
+    21300022: ElefanteForAnimation_11
+    21300024: ElefanteForAnimation_12
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ElefanteForAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 467.42203
+        width: 212.58696
+        height: 195.57797
+      alignment: 9
+      pivot: {x: 0.49626753, y: 0.50659066}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8753a044f39c7cc45a8689e785274cb0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 462
+        width: 205
+        height: 189
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cf53a533d465764a96c1e2984916aa6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 461
+        width: 184
+        height: 189
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49735448}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb73dfc9e2148b41aae3e3629e14de8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 13.45476
+        y: 195.42215
+        width: 253.20537
+        height: 278.65747
+      alignment: 9
+      pivot: {x: 0.4938491, y: 0.500894}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56d81fa53e6a3ee49b05aa9591639dfc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 372.00003
+        width: 142
+        height: 84.99997
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49999982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ac896ed2c47c2489b1843895fb8c72
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 144.34712
+        width: 157
+        height: 290.4831
+      alignment: 9
+      pivot: {x: 0.522293, y: 0.501416}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1330931eeb7b3eb469d7535f82c7662c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 225
+        width: 85.77338
+        height: 109
+      alignment: 9
+      pivot: {x: 0.48966244, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 116649b28bf7bea418349fa148346138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 105
+        width: 99
+        height: 112
+      alignment: 9
+      pivot: {x: 0.4949495, y: 0.4776786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ef65b81ce6d21844a8e80b714381910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 186.00002
+        y: 115
+        width: 98.999985
+        height: 109
+      alignment: 9
+      pivot: {x: 0.49494943, y: 0.48165137}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d80b5a36c95f5a41ad470f7366e3f54
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 83.50002
+        width: 101
+        height: 124.00001
+      alignment: 9
+      pivot: {x: 0.4950495, y: 0.5524191}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9fdd9def25ce3446a04af9b37b9fc1f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 43.000004
+        y: 0
+        width: 109
+        height: 114
+      alignment: 9
+      pivot: {x: 0.49999994, y: 0.49122807}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da69b3c8592da64c93dcc26e11467db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0
+        width: 109
+        height: 113
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49115044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41fdd104ff2ebea4883eab4d00a2d4a2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElefanteForAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 390.00003
+        width: 61
+        height: 40.99997
+      alignment: 9
+      pivot: {x: 0.6311475, y: 0.59756064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 986056a5c88d0f04ca644648aa71dd89
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: bc0cb5484c517da4d99dd0d6784cdc6f
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 636894793457191679
+  assetBundleName: 
+  assetBundleVariant: 
