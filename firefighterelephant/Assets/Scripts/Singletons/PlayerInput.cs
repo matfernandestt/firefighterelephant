@@ -8,26 +8,30 @@ public class PlayerInput : SingletonOfType<PlayerInput>
 	private bool kickDoorButtonDown;
 	private bool upStairsButtonDown;
 	private bool downStairsButtonDown;
+    private bool pauseButtonDown;
 
-	public KeyCode FireExtinguisherButton;
+    public KeyCode FireExtinguisherButton;
 	public KeyCode SwitchExtinguisherButton;
 	public KeyCode KickDoorButton;
 	public KeyCode UpStairsButton;
 	public KeyCode DownStairsButton;
+    public KeyCode PauseButton;
 
-	public static event Action FireExtinguisherButtonDown;
+    public static event Action FireExtinguisherButtonDown;
 	public static event Action SwitchExtinguisherButtonDown;
 	public static event Action KickDoorButtonDown;
 	public static event Action UpStairsButtonDown;
 	public static event Action DownStairsButtonDown;
+    public static event Action PauseButtonDown;
 
-	private void Update()
+    private void Update()
 	{
 		fireExtinguisherButtonDown = Input.GetKey(FireExtinguisherButton);
 		switchExtinguisherButtonDown = Input.GetKeyDown(SwitchExtinguisherButton);
 		kickDoorButtonDown = Input.GetKeyDown(KickDoorButton);
 		upStairsButtonDown = Input.GetKeyDown(UpStairsButton);
 		downStairsButtonDown = Input.GetKeyDown(DownStairsButton);
+        pauseButtonDown = Input.GetKeyDown(PauseButton);
 
 		if (fireExtinguisherButtonDown)
 		{
@@ -53,6 +57,11 @@ public class PlayerInput : SingletonOfType<PlayerInput>
 		{
 			OnDownStairsButtonDown();
 		}
+
+        if (pauseButtonDown)
+        {
+            OnPauseButtonDown();
+        }
 	}
 
 	#region Invocators
@@ -81,4 +90,9 @@ public class PlayerInput : SingletonOfType<PlayerInput>
 		DownStairsButtonDown?.Invoke();
 	}
 	#endregion
+
+    private static void OnPauseButtonDown()
+    {
+        PauseButtonDown?.Invoke();
+    }
 }

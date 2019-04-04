@@ -11,6 +11,8 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private FireType actualExtinguisherType;
 
+    private int _dir = 1;
+
 	#region Delegates
 	private void OnEnable()
 	{
@@ -32,10 +34,17 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	public void Shoot()
 	{
-		var origin = SpawnPoint.position;
+		var origin = SpawnPoint.localPosition;
 
-		var hit = Physics2D.Raycast(origin, transform.right * ExtinguisherRange, FireLayerMask);
-		Debug.DrawRay(origin, transform.right * ExtinguisherRange, Color.red);
+        if (Player.Velocity.x > 0)
+            _dir = 1;
+        if(Player.Velocity.x < 0)
+            _dir = -1;
+
+        origin = new Vector3(transform.position.x + origin.x * _dir, SpawnPoint.position.y, SpawnPoint.position.z);
+
+        var hit = Physics2D.Raycast(origin, (transform.right * _dir) * ExtinguisherRange, FireLayerMask);
+		Debug.DrawRay(origin, (transform.right * _dir) * ExtinguisherRange, Color.red);
 
 		if (hit)
 		{
