@@ -25,7 +25,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private void OnEnable()
 	{
 		PlayerInput.FireExtinguisherButtonUp += EndParticle;
-		PlayerInput.FireExtinguisherButtonDown += ReleaseParticle;
+		PlayerInput.FireExtinguisherButtonDown += StartShooting;
 		PlayerInput.FireExtinguisherButtonHold += Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown += SwitchExtinguisher;
 	}
@@ -33,7 +33,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private void OnDisable()
 	{
 		PlayerInput.FireExtinguisherButtonUp -= EndParticle;
-		PlayerInput.FireExtinguisherButtonDown -= ReleaseParticle;
+		PlayerInput.FireExtinguisherButtonDown -= StartShooting;
 		PlayerInput.FireExtinguisherButtonHold -= Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown -= SwitchExtinguisher;
 	}
@@ -55,7 +55,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 		origin = new Vector3(transform.position.x + origin.x * direction, SpawnPoint.position.y, SpawnPoint.position.z);
 
-		var hit = Physics2D.Raycast(origin, (transform.right * direction) * ExtinguisherRange, FireLayerMask.value);
+		var hit = Physics2D.Raycast(origin, (transform.right * direction) * ExtinguisherRange, FireLayerMask);
 		Debug.DrawRay(origin, (transform.right * direction) * ExtinguisherRange, Color.red);
 
 		if (hit)
@@ -76,8 +76,15 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		}
 	}
 
-	private void ReleaseParticle()
+	private void StartShooting()
 	{
+		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Shoot);
+	}
+
+	public void ReleaseParticle()
+	{
+		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, true);
+
 		switch (actualExtinguisherType)
 		{
 			case FireType.A:
@@ -102,6 +109,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void EndParticle()
 	{
+		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, false);
 		Destroy(actualExtinguisherParticle);
 	}
 
@@ -112,6 +120,8 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void SwitchExtinguisher()
 	{
+		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Switch);
+
 		actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType + 1 : FireType.A;
 		Debug.Log("Changed to " + actualExtinguisherType);
 	}

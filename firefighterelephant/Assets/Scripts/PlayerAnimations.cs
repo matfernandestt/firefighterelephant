@@ -12,10 +12,24 @@ public class PlayerAnimations : MonoBehaviour
 	public static string Collect = "Collect";
 	public static string Shooting = "Shooting";
 
-	public Animator PlayerAnimator;
+	public static Animator PlayerAnimator;
+	public PlayerFireExtinguisher FireExtinguisher;
+
+	private Animator animator;
+
+	private void Start()
+	{
+		animator = GetComponent<Animator>();
+		PlayerAnimator = animator;
+	}
 
 	private void Update()
 	{
-		PlayerAnimator.SetFloat(Velocity, Mathf.Abs(Player.Velocity.x));
+		animator.SetFloat(Velocity, Mathf.Abs(Player.Velocity.x));
+	}
+
+	public void ReleaseExtinguisherParticle()
+	{
+		FireExtinguisher.ReleaseParticle();
 	}
 }

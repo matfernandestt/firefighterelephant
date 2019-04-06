@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3389383205
+    locked: 0
   - name: Smoke
     uniqueID: 4248306723
     locked: 0
@@ -58,6 +61,12 @@ TagManager:
     locked: 0
   - name: Explosion
     uniqueID: 3066463161
+    locked: 0
+  - name: Player
+    uniqueID: 3305599295
+    locked: 0
+  - name: Foreground
+    uniqueID: 3568579427
     locked: 0
   - name: UI
     uniqueID: 3631270609

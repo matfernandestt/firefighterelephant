@@ -18,6 +18,6 @@ public class CameraController : MonoBehaviour
 	public void ChangeFocus(Transform newFocus)
 	{
 		var position = newFocus.position;
-		transform.position = new Vector3(position.x, position.y);
+		transform.position = new Vector3(position.x, position.y, transform.position.z);
 	}
 }
