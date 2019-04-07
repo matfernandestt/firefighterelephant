@@ -16,7 +16,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private FireType actualExtinguisherType;
 	private GameObject actualExtinguisherParticle;
-
+	private Character character;
 	private int direction = 1;
 
 	#region Delegates
@@ -42,6 +42,8 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private void Start()
 	{
 		actualExtinguisherType = FireType.A;
+		ParticleParent = FindObjectOfType<DynamicObjects>().transform;
+		character = GetComponentInChildren<Character>();
 	}
 
 	public void Shoot()
@@ -52,6 +54,11 @@ public class PlayerFireExtinguisher : MonoBehaviour
 			direction = 1;
 		if (Player.Velocity.x < 0)
 			direction = -1;
+
+		if (PlayerAnimations.PlayerAnimator.GetBool(PlayerAnimations.Shooting))
+		{
+			ReleaseParticle();
+		}
 
 		origin = new Vector3(transform.position.x + origin.x * direction, SpawnPoint.position.y, SpawnPoint.position.z);
 
@@ -79,12 +86,11 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private void StartShooting()
 	{
 		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Shoot);
+		Player.CanMove = false;
 	}
 
 	public void ReleaseParticle()
 	{
-		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, true);
-
 		switch (actualExtinguisherType)
 		{
 			case FireType.A:
@@ -105,13 +111,13 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private void InstantiateParticle(GameObject particle)
 	{
 		actualExtinguisherParticle =
-			Instantiate(particle, SpawnPoint.position, particle.transform.rotation, ParticleParent);
+			Instantiate(particle, SpawnPoint.position, character.transform.rotation, ParticleParent);
 	}
 
 	private void EndParticle()
 	{
 		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, false);
-		Destroy(actualExtinguisherParticle);
+		Player.CanMove = true;
 	}
 
 	private void ExtinguishFire()
@@ -142,4 +148,4 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		StartCoroutine(Player.WaitFor(0.8f));
 	}
 }
-	
+

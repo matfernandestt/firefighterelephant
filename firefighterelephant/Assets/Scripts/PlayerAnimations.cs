@@ -30,6 +30,6 @@ public class PlayerAnimations : MonoBehaviour
 
 	public void ReleaseExtinguisherParticle()
 	{
-		FireExtinguisher.ReleaseParticle();
+		PlayerAnimator.SetBool(Shooting, true);
 	}
 }

@@ -12,17 +12,17 @@ public class Player : MonoBehaviour
 	private PlayerMovement movement;
 	private Vector3 input;
 
-	private static bool canMove;
+	public static bool CanMove;
 
 	private void Start()
 	{
 		movement = GetComponent<PlayerMovement>();
-		canMove = true;
+		CanMove = true;
 	}
 
 	private void Update()
 	{
-		if (!canMove)
+		if (!CanMove)
 			return;
 
 		input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -34,10 +34,10 @@ public class Player : MonoBehaviour
 
 	public static IEnumerator WaitFor(float seconds)
 	{
-		canMove = false;
+		CanMove = false;
 
 		yield return new WaitForSeconds(seconds);
 
-		canMove = true;
+		CanMove = true;
 	}
 }
