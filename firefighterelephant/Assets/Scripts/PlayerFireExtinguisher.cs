@@ -8,16 +8,19 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	[Header("Properties")] public LayerMask FireLayerMask;
 	public Transform SpawnPoint;
 	public float ExtinguisherRange;
+	public ExtinguisherIcon ExtinguisherIcon;
 
 	[Header("Particles")] public GameObject ExtinguisherParticleA;
 	public GameObject ExtinguisherParticleB;
 	public GameObject ExtinguisherParticleC;
 	public Transform ParticleParent;
 
+	public static int UnlockedExtinguishers;
+	public static event Action UnlockExtinguisher;
+
 	private FireType actualExtinguisherType;
 	private GameObject actualExtinguisherParticle;
 	private Character character;
-	private int direction = 1;
 
 	#region Delegates
 
@@ -27,6 +30,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		PlayerInput.FireExtinguisherButtonDown += StartShooting;
 		PlayerInput.FireExtinguisherButtonHold += Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown += SwitchExtinguisher;
+		UnlockExtinguisher += SwitchExtinguisher;
 	}
 
 	private void OnDisable()
@@ -35,6 +39,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		PlayerInput.FireExtinguisherButtonDown -= StartShooting;
 		PlayerInput.FireExtinguisherButtonHold -= Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown -= SwitchExtinguisher;
+		UnlockExtinguisher -= SwitchExtinguisher;
 	}
 
 	#endregion
@@ -44,26 +49,24 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		actualExtinguisherType = FireType.A;
 		ParticleParent = FindObjectOfType<DynamicObjects>().transform;
 		character = GetComponentInChildren<Character>();
+
+		if (UnlockedExtinguishers == 0)
+		{
+			ExtinguisherIcon.GetComponent<SpriteRenderer>().enabled = false;
+		}
 	}
 
 	public void Shoot()
 	{
-		var origin = SpawnPoint.localPosition;
-
-		if (Player.Velocity.x > 0)
-			direction = 1;
-		if (Player.Velocity.x < 0)
-			direction = -1;
-
-		if (PlayerAnimations.PlayerAnimator.GetBool(PlayerAnimations.Shooting))
+		if (!PlayerAnimations.IsShooting)
 		{
-			ReleaseParticle();
+			return;
 		}
 
-		origin = new Vector3(transform.position.x + origin.x * direction, SpawnPoint.position.y, SpawnPoint.position.z);
+		ReleaseParticle();
 
-		var hit = Physics2D.Raycast(origin, (transform.right * direction) * ExtinguisherRange, FireLayerMask);
-		Debug.DrawRay(origin, (transform.right * direction) * ExtinguisherRange, Color.red);
+		var hit = Physics2D.Raycast(SpawnPoint.position, character.transform.right, ExtinguisherRange, FireLayerMask);
+		Debug.DrawRay(SpawnPoint.position, character.transform.right * ExtinguisherRange, Color.red);
 
 		if (hit)
 		{
@@ -73,11 +76,12 @@ public class PlayerFireExtinguisher : MonoBehaviour
 			{
 				if (fire.Type == actualExtinguisherType)
 				{
-					ExtinguishFire();
+					fire.Extinguishing = true;
 				}
 				else
 				{
 					fire.Explode();
+					Debug.Log("Explode");
 				}
 			}
 		}
@@ -85,7 +89,11 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void StartShooting()
 	{
+		if (UnlockedExtinguishers == 0)
+			return;
+
 		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Shoot);
+		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, true);
 		Player.CanMove = false;
 	}
 
@@ -104,7 +112,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 				break;
 			default:
 				Debug.LogError("Extinguisher not found!");
-				throw new ArgumentOutOfRangeException();
+				break;
 		}
 	}
 
@@ -116,6 +124,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void EndParticle()
 	{
+		PlayerAnimations.IsShooting = false;
 		PlayerAnimations.PlayerAnimator.SetBool(PlayerAnimations.Shooting, false);
 		Player.CanMove = true;
 	}
@@ -127,15 +136,29 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void SwitchExtinguisher()
 	{
+		if (UnlockedExtinguishers <= 1)
+		{
+			ExtinguisherIcon.GetComponent<SpriteRenderer>().enabled = true;
+
+			ExtinguisherIcon.Animator.SetTrigger("First");
+			return;
+		}
+
 		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Switch);
 
-		actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType + 1 : FireType.A;
-		Debug.Log("Changed to " + actualExtinguisherType);
+		if (UnlockedExtinguishers < 3)
+		{
+			actualExtinguisherType = actualExtinguisherType == FireType.A ? FireType.B : FireType.A;
+		}
+		else
+		{
+			actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType + 1 : FireType.A;
+		}
 
 		switch (actualExtinguisherType)
 		{
 			case FireType.A:
-				ExtinguisherIcon.Animator.SetTrigger("SwitchToA");
+				ExtinguisherIcon.Animator.SetTrigger(UnlockedExtinguishers < 3 ? "First" : "SwitchToA");
 				break;
 			case FireType.B:
 				ExtinguisherIcon.Animator.SetTrigger("SwitchToB");
@@ -146,6 +169,11 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		}
 
 		StartCoroutine(Player.WaitFor(0.8f));
+	}
+
+	public static void OnUnlockExtinguisher()
+	{
+		UnlockExtinguisher?.Invoke();
 	}
 }
 

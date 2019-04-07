@@ -9,7 +9,7 @@ public enum TypesOfStairs
 	Down
 }
 
-public class PlayerStairs : MonoBehaviour
+public class PlayerStairsCollision : MonoBehaviour
 {
 	public LayerMask StairLayerMask;
 

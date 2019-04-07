@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDoor : MonoBehaviour
+public class PlayerDoorCollision : MonoBehaviour
 {
 	public LayerMask DoorLayerMask;
 
@@ -28,7 +28,6 @@ public class PlayerDoor : MonoBehaviour
 	{
 		if (!CheckForDoor())
 		{
-			PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Kick);
 			return;
 		}
 
@@ -64,6 +63,8 @@ public class PlayerDoor : MonoBehaviour
 		ScreenFade.Fade();
 		actualDoor.Animator.SetTrigger("Open");
 
+		Player.CanMove = false;
+
 		yield return new WaitForSeconds(1f);
 
 		actualDoor.EnterDoor();
@@ -74,5 +75,7 @@ public class PlayerDoor : MonoBehaviour
 		Player.Velocity = Vector3.zero;
 
 		transform.position = doorTransform.position;
+
+		Player.CanMove = true;
 	}
 }

@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\Civilian.cs" />
     <Compile Include="Assets\Scripts\DynamicObjects.cs" />
+    <Compile Include="Assets\Scripts\Extinguisher.cs" />
     <Compile Include="Assets\Scripts\ExtinguisherIcon.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
     <Compile Include="Assets\Scripts\FirstFloor.cs" />
@@ -98,10 +99,11 @@
     <Compile Include="Assets\Scripts\PauseController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimations.cs" />
-    <Compile Include="Assets\Scripts\PlayerDoor.cs" />
+    <Compile Include="Assets\Scripts\PlayerDoorCollision.cs" />
+    <Compile Include="Assets\Scripts\PlayerExtinguisherCollision.cs" />
     <Compile Include="Assets\Scripts\PlayerFireExtinguisher.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\PlayerStairs.cs" />
+    <Compile Include="Assets\Scripts\PlayerStairsCollision.cs" />
     <Compile Include="Assets\Scripts\RoomDoor.cs" />
     <Compile Include="Assets\Scripts\SafeZone.cs" />
     <Compile Include="Assets\Scripts\ScreenFade.cs" />
