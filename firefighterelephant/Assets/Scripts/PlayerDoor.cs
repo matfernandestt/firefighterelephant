@@ -7,6 +7,12 @@ public class PlayerDoor : MonoBehaviour
 	public LayerMask DoorLayerMask;
 
 	private RoomDoor actualDoor;
+	private Character character;
+
+	private void Start()
+	{
+		character = GetComponentInChildren<Character>();
+	}
 
 	private void OnEnable()
 	{
@@ -20,10 +26,14 @@ public class PlayerDoor : MonoBehaviour
 
 	private void OpenDoor()
 	{
-		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Kick);
-
 		if (!CheckForDoor())
+		{
+			PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Kick);
 			return;
+		}
+
+		if (!actualDoor.IsOpen)
+			PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Kick);
 
 		StartCoroutine(KickDoor());
 	}
@@ -31,9 +41,9 @@ public class PlayerDoor : MonoBehaviour
 	private bool CheckForDoor()
 	{
 		var position = transform.position;
-		var hit = Physics2D.Raycast(position, Vector2.down, 2f, DoorLayerMask);
+		var hit = Physics2D.Raycast(position, character.transform.right, 1f, DoorLayerMask);
 
-		Debug.DrawRay(position, Vector2.down * 2f, Color.red);
+		Debug.DrawRay(position, character.transform.right, Color.red);
 
 		if (hit)
 		{
@@ -51,9 +61,14 @@ public class PlayerDoor : MonoBehaviour
 
 	private IEnumerator KickDoor()
 	{
+		ScreenFade.Fade();
+		actualDoor.Animator.SetTrigger("Open");
+
 		yield return new WaitForSeconds(1f);
 
 		actualDoor.EnterDoor();
+		actualDoor.IsOpen = true;
+
 		var doorTransform = actualDoor.OtherDoor.transform;
 
 		Player.Velocity = Vector3.zero;

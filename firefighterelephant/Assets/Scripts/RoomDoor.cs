@@ -8,11 +8,15 @@ public class RoomDoor : MonoBehaviour
 	public RoomDoor OtherDoor;
 	public bool EntranceDoor;
 
+	[HideInInspector] public bool IsOpen;
+	[HideInInspector] public Animator Animator;
+
 	private CameraController cameraController;
 
 	private void Start()
 	{
 		cameraController = FindObjectOfType<CameraController>();
+		Animator = GetComponent<Animator>();
 	}
 
 	public void EnterDoor()
