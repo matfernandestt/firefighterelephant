@@ -8,8 +8,12 @@ public class GameController : MonoBehaviour
 	public static event Action UpdateTimer;
 	public static float ActualTime = 300f;
 
+	public GameObject ScreenFade;
+
 	private void Start()
 	{
+		ScreenFade.SetActive(true);
+
         OnUpdateTimer();
 		StartCoroutine(ChangeTimer());
 	}

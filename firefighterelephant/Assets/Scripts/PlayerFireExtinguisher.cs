@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class PlayerFireExtinguisher : MonoBehaviour
 {
-	[Header("Properties")]
-	public LayerMask FireLayerMask;
+	[Header("Properties")] public LayerMask FireLayerMask;
 	public Transform SpawnPoint;
 	public float ExtinguisherRange;
 
-	[Header("Particles")]
-	public GameObject ExtinguisherParticleA;
+	[Header("Particles")] public GameObject ExtinguisherParticleA;
 	public GameObject ExtinguisherParticleB;
 	public GameObject ExtinguisherParticleC;
 	public Transform ParticleParent;
@@ -22,6 +20,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 	private int direction = 1;
 
 	#region Delegates
+
 	private void OnEnable()
 	{
 		PlayerInput.FireExtinguisherButtonUp += EndParticle;
@@ -37,6 +36,7 @@ public class PlayerFireExtinguisher : MonoBehaviour
 		PlayerInput.FireExtinguisherButtonHold -= Shoot;
 		PlayerInput.SwitchExtinguisherButtonDown -= SwitchExtinguisher;
 	}
+
 	#endregion
 
 	private void Start()
@@ -104,7 +104,8 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 	private void InstantiateParticle(GameObject particle)
 	{
-		actualExtinguisherParticle = Instantiate(particle, SpawnPoint.position, particle.transform.rotation, ParticleParent);
+		actualExtinguisherParticle =
+			Instantiate(particle, SpawnPoint.position, particle.transform.rotation, ParticleParent);
 	}
 
 	private void EndParticle()
@@ -124,5 +125,21 @@ public class PlayerFireExtinguisher : MonoBehaviour
 
 		actualExtinguisherType = actualExtinguisherType != FireType.C ? actualExtinguisherType + 1 : FireType.A;
 		Debug.Log("Changed to " + actualExtinguisherType);
+
+		switch (actualExtinguisherType)
+		{
+			case FireType.A:
+				ExtinguisherIcon.Animator.SetTrigger("SwitchToA");
+				break;
+			case FireType.B:
+				ExtinguisherIcon.Animator.SetTrigger("SwitchToB");
+				break;
+			case FireType.C:
+				ExtinguisherIcon.Animator.SetTrigger("SwitchToC");
+				break;
+		}
+
+		StartCoroutine(Player.WaitFor(0.8f));
 	}
 }
+	
