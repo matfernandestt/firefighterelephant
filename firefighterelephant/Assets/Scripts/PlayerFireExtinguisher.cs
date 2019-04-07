@@ -81,10 +81,21 @@ public class PlayerFireExtinguisher : MonoBehaviour
 				else
 				{
 					fire.Explode();
-					Debug.Log("Explode");
+					StartCoroutine(ReactToExplosion());
 				}
 			}
 		}
+	}
+
+	private IEnumerator ReactToExplosion()
+	{
+		Player.CanMove = false;
+		PlayerAnimations.PlayerAnimator.SetTrigger(PlayerAnimations.Explode);
+		EndParticle();
+
+		yield return new WaitForSeconds(1.5f);
+
+		Player.CanMove = true;
 	}
 
 	private void StartShooting()

@@ -30,9 +30,7 @@ public class Civilian : MonoBehaviour
 			if (Physics2D.Raycast(transform.position, Vector2.right, SavingDistance, PlayerLayerMask))
 			{
 				canMove = true;
-				PlayerInput.KickDoorButtonDown += EnterDoor;
-				PlayerInput.UpStairsButtonDown += EnterDoor;
-				PlayerInput.DownStairsButtonDown += EnterDoor;
+				Player.CiviliansFollowing.Add(this);
 			}
 
 			return;
@@ -47,23 +45,38 @@ public class Civilian : MonoBehaviour
 			if (safeZone != null)
 			{
 				safe = true;
-				PlayerInput.KickDoorButtonDown -= EnterDoor;
-				PlayerInput.UpStairsButtonDown -= EnterDoor;
-				PlayerInput.DownStairsButtonDown -= EnterDoor;
+				Player.CiviliansFollowing.Remove(this);
 			}
 		}
 
 		if (Vector2.Distance(transform.position, player.transform.position) > MinimumPlayerDistance)
 		{
-			if (Physics2D.Raycast(transform.position, Vector2.right, RaycastDistance, PlayerLayerMask))
+			RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, RaycastDistance, PlayerLayerMask);
+			RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, RaycastDistance, PlayerLayerMask);
+
+			if (hitRight)
 			{
 				translation = Vector2.right * Speed * Time.deltaTime;
 				transform.Translate(translation);
+
+				var playerHit = hitRight.transform.GetComponent<Player>();
+
+				if (playerHit != null)
+				{
+					transform.position = new Vector3(transform.position.x, player.transform.position.y);
+				}
 			}
-			else if (Physics2D.Raycast(transform.position, Vector2.left, RaycastDistance, PlayerLayerMask))
+			else if (hitLeft)
 			{
 				translation = Vector2.left * Speed * Time.deltaTime;
 				transform.Translate(translation);
+
+				var playerHit = hitLeft.transform.GetComponent<Player>();
+
+				if (playerHit != null)
+				{
+					transform.position = new Vector3(transform.position.x, player.transform.position.y);
+				}
 			}
 		}
 

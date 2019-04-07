@@ -82,7 +82,7 @@ public class PlayerStairsCollision : MonoBehaviour
 				if (upStair != null)
 				{
 					transform.position = upStair.transform.position;
-					cameraController.ChangeFocus(upStair.transform.parent);
+					cameraController.ChangeFocus(upStair.Room);
 				}
 
 				break;
@@ -92,7 +92,7 @@ public class PlayerStairsCollision : MonoBehaviour
 				if (downStair != null)
 				{
 					transform.position = downStair.transform.position;
-					cameraController.ChangeFocus(downStair.transform.parent);
+					cameraController.ChangeFocus(downStair.Room);
 				}
 
 				break;

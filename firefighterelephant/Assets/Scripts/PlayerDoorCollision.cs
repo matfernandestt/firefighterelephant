@@ -76,6 +76,14 @@ public class PlayerDoorCollision : MonoBehaviour
 
 		transform.position = doorTransform.position;
 
+		if (Player.CiviliansFollowing.Count > 0)
+		{
+			foreach (var civilian in Player.CiviliansFollowing)
+			{
+				civilian.transform.position = transform.position;
+			}
+		}
+
 		Player.CanMove = true;
 	}
 }

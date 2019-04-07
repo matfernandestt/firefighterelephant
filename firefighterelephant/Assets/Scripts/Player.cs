@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
 {
 	public static Vector3 Velocity;
+	public static List<Civilian> CiviliansFollowing = new List<Civilian>();
 
 	public float MoveSpeed;
 

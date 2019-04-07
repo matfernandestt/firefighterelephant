@@ -199,6 +199,7 @@ MonoBehaviour:
     m_Bits: 256
   SpawnPoint: {fileID: 6140705099657399471}
   ExtinguisherRange: 4
+  ExtinguisherIcon: {fileID: 1573173745}
   ExtinguisherParticleA: {fileID: 6173409654137131901, guid: 4997fa3f91d78a74ebf18a10e3429dc3,
     type: 3}
   ExtinguisherParticleB: {fileID: 4903253817116194769, guid: 5f48654a79de89e4194e3b2de46faa76,
