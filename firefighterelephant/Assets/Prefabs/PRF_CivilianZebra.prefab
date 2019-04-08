@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292a321c3cd3b0549894743f78b2b573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 6
   RaycastDistance: 8
   SavingDistance: 3
   MinimumPlayerDistance: 1.2
@@ -104,11 +104,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7576939201193749252}
     m_Modifications:
-    - target: {fileID: 8237253045132443911, guid: daf2b879427e0d84f9b4f142e75a151b,
-        type: 3}
-      propertyPath: m_Name
-      value: PER_Zebra
-      objectReference: {fileID: 0}
     - target: {fileID: 8237253045132443910, guid: daf2b879427e0d84f9b4f142e75a151b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -163,6 +158,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237253045132443911, guid: daf2b879427e0d84f9b4f142e75a151b,
+        type: 3}
+      propertyPath: m_Name
+      value: PER_Zebra
       objectReference: {fileID: 0}
     - target: {fileID: 8237253043306934902, guid: daf2b879427e0d84f9b4f142e75a151b,
         type: 3}

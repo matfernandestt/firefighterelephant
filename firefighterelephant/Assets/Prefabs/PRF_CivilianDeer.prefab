@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292a321c3cd3b0549894743f78b2b573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 6
   RaycastDistance: 8
   SavingDistance: 3
   MinimumPlayerDistance: 1.2
