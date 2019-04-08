@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour
 
 		OnUpdateTimer();
 		StartCoroutine(ChangeTimer());
+
+        Level = FadeManager.Instance.CurrentLevel;
 	}
 
 	private void OnEnable()

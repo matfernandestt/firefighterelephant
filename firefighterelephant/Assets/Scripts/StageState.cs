@@ -50,4 +50,9 @@ public class StageState : MonoBehaviour
 				break;
 		}
 	}
+
+    public void SetSelectedLevel()
+    {
+        FadeManager.Instance.CurrentLevel = levelIndex;
+    }
 }

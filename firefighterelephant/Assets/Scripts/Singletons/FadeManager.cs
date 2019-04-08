@@ -10,6 +10,8 @@ public class FadeManager : SingletonOfType<FadeManager>
 
 	private Coroutine currentCoroutine;
 
+    public int CurrentLevel;
+
 	public void FadeToScene(string sceneName)
 	{
 		if (currentCoroutine != null)
