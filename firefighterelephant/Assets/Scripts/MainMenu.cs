@@ -97,7 +97,7 @@ public class MainMenu : MonoBehaviour
 
 	public void LevelSelected()
 	{
-		FadeManager.Instance.FadeToScene("SCN_Toy");
+		FadeManager.Instance.FadeToScene("SCN_Level01");
 	}
 
 	#region Button management

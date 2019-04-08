@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public enum SoundTypes { SFX, Music };
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonOfType<AudioManager>
 {
     [SerializeField] private AudioSource srcBaseSFX;
     [SerializeField] private AudioSource srcBaseMusic;

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 	public static int FiresExtinguished;
 	public static int FiresToExtinguish;
 	public static int Score;
+	public static int ActualLevel;
 
 	public static event Action UpdateTimer;
 	public static event Action SaveCivilian;
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour
 		Score = 0;
 		CiviliansSaved = 0;
 		FiresExtinguished = 0;
+		ActualLevel = Level;
 
 		CiviliansToSave = Civilians;
 		FiresToExtinguish = Fires;

@@ -54,6 +54,6 @@ public class EndGame : MonoBehaviour
 
 	public void NextLevel()
 	{
-		//FadeManager.Instance.FadeToScene();
+		FadeManager.Instance.FadeToScene("SCN_Level" + (GameController.ActualLevel + 1).ToString("00"));
 	}
 }
