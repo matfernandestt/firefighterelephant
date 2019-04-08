@@ -6,19 +6,24 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	[Header("Properties")]
+	public int Level;
 	public int Civilians;
 	public int Fires;
 	public int Time;
+	public int UnlockedExtinguishers;
 
 	[Header("Stars")]
 	public float Stars3;
 	public float Stars2;
-	public float Stars1;
 
+	public GameObject EndGameCanvas;
+
+	public static GameObject VictoryScreen;
 	public static int CiviliansSaved;
 	public static int CiviliansToSave;
 	public static int FiresExtinguished;
 	public static int FiresToExtinguish;
+	public static int Score;
 
 	public static event Action UpdateTimer;
 	public static event Action SaveCivilian;
@@ -31,6 +36,7 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		Score = 0;
 		CiviliansSaved = 0;
 		FiresExtinguished = 0;
 
@@ -38,9 +44,13 @@ public class GameController : MonoBehaviour
 		FiresToExtinguish = Fires;
 		ActualTime = Time;
 
+		PlayerFireExtinguisher.UnlockedExtinguishers = UnlockedExtinguishers;
+
 		ScreenFade.SetActive(true);
 
-        OnUpdateTimer();
+		VictoryScreen = EndGameCanvas;
+
+		OnUpdateTimer();
 		StartCoroutine(ChangeTimer());
 	}
 
@@ -85,6 +95,21 @@ public class GameController : MonoBehaviour
 			return;
 		}
 
+		if (Time > Stars3)
+		{
+			Score = 3;
+		}
+		else if (Time > Stars2)
+		{
+			Score = 2;
+		}
+		else
+		{
+			Score = 1;
+		}
+
+		PlayerPrefsManager.Instance.SetLevelScore(Level, Score);
+
 		OnVictory();
 	}
 
@@ -106,6 +131,9 @@ public class GameController : MonoBehaviour
 	public static void OnVictory()
 	{
 		Victory?.Invoke();
+
+		var victoryScreen = Instantiate(VictoryScreen);
+		victoryScreen.GetComponent<EndGame>().score = Score;
 	}
 
 	public static void OnGameOver()

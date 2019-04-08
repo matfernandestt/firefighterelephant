@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 	public float DampTime = 0.125f;
+	public Transform FirstFloor;
 
 	private Vector3 cameraVelocity;
 	private Transform actualFocus;
@@ -14,9 +15,7 @@ public class CameraController : MonoBehaviour
 	{
 		cameraVelocity = Vector3.zero;
 
-		var focus = FindObjectOfType<FirstFloor>().transform;
-
-		ChangeFocus(focus);
+		ChangeFocus(FirstFloor);
 	}
 
 	private void Update()

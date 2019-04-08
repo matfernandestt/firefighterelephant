@@ -54,6 +54,6 @@ public class EndGame : MonoBehaviour
 
 	public void NextLevel()
 	{
-
+		//FadeManager.Instance.FadeToScene();
 	}
 }
