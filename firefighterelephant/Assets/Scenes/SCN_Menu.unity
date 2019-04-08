@@ -682,7 +682,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293217954}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -3785,7 +3785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1736358841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6733,6 +6733,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5909656597360026140, guid: 99485d57d1359034f9ff082e0758a962,
+        type: 3}
+      propertyPath: m_Depth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99485d57d1359034f9ff082e0758a962, type: 3}
 --- !u!114 &8507234821086965903
@@ -6748,3 +6753,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireExtinguisher: {fileID: 0}
+  ExtinguisherSprite: {fileID: 0}
