@@ -45,6 +45,10 @@ public class Civilian : MonoBehaviour
 			if (safeZone != null)
 			{
 				safe = true;
+
+				GameController.CiviliansSaved++;
+				GameController.OnSaveCivilian();
+
 				Player.CiviliansFollowing.Remove(this);
 			}
 		}

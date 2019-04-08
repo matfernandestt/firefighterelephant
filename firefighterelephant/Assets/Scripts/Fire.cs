@@ -53,6 +53,9 @@ public class Fire : MonoBehaviour
 		}
 		else if (!Smoke1.IsAlive())
 		{
+			GameController.FiresExtinguished++;
+			GameController.OnExtinguishFire();
+
 			Destroy(gameObject);
 		}
 	}

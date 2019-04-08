@@ -83,6 +83,8 @@ public class PlayerStairsCollision : MonoBehaviour
 				{
 					transform.position = upStair.transform.position;
 					cameraController.ChangeFocus(upStair.Room);
+
+					ChangeCivilianPosition();
 				}
 
 				break;
@@ -93,12 +95,25 @@ public class PlayerStairsCollision : MonoBehaviour
 				{
 					transform.position = downStair.transform.position;
 					cameraController.ChangeFocus(downStair.Room);
+
+					ChangeCivilianPosition();
 				}
 
 				break;
 
 			default:
 				throw new ArgumentOutOfRangeException(nameof(typeOfStair), typeOfStair, null);
+		}
+	}
+
+	private void ChangeCivilianPosition()
+	{
+		if (Player.CiviliansFollowing.Count > 0)
+		{
+			foreach (var civilian in Player.CiviliansFollowing)
+			{
+				civilian.transform.position = transform.position;
+			}
 		}
 	}
 }

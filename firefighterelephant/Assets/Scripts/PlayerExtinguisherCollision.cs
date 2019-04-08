@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,6 +54,21 @@ public class PlayerExtinguisherCollision : MonoBehaviour
 				PlayerAnimations.NewExtinguisher = extinguisher.GetComponent<SpriteRenderer>().sprite;
 				Destroy(extinguisher.gameObject, 0.66f);
 
+				switch (extinguisher.ExtinguisherType)
+				{
+					case FireType.A:
+						PlayerFireExtinguisher.UnlockedExtinguishers = 1;
+						break;
+					case FireType.B:
+						PlayerFireExtinguisher.UnlockedExtinguishers = 2;
+						break;
+					case FireType.C:
+						PlayerFireExtinguisher.UnlockedExtinguishers = 3;
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+
 				return true;
 			}
 		}
@@ -67,8 +83,6 @@ public class PlayerExtinguisherCollision : MonoBehaviour
 		yield return new WaitForSeconds(2f);
 
 		Player.CanMove = true;
-
-		PlayerFireExtinguisher.UnlockedExtinguishers++;
 
 		PlayerFireExtinguisher.OnUnlockExtinguisher();
 	}
