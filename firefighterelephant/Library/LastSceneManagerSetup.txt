@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/SCN_Menu.unity
-  isLoaded: 1
-  isActive: 1

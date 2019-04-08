@@ -13,7 +13,12 @@ public class PlayerAnimations : MonoBehaviour
 	public static string Shooting = "Shooting";
 
 	public static Animator PlayerAnimator;
+	public static bool IsShooting;
+
 	public PlayerFireExtinguisher FireExtinguisher;
+	public SpriteRenderer ExtinguisherSprite;
+
+	public static Sprite NewExtinguisher;
 
 	private Animator animator;
 
@@ -30,6 +35,14 @@ public class PlayerAnimations : MonoBehaviour
 
 	public void ReleaseExtinguisherParticle()
 	{
-		PlayerAnimator.SetBool(Shooting, true);
+		if (PlayerAnimator.GetBool(Shooting))
+		{
+			IsShooting = true;
+		}
+	}
+
+	public void ChangeExtinguisher()
+	{
+		ExtinguisherSprite.sprite = NewExtinguisher;
 	}
 }

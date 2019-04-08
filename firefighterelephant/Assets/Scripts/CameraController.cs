@@ -5,19 +5,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	private Vector3 offset;
+	public float DampTime = 0.125f;
+
+	private Vector3 cameraVelocity;
+	private Transform actualFocus;
 
 	private void Start()
 	{
+		cameraVelocity = Vector3.zero;
+
 		var focus = FindObjectOfType<FirstFloor>().transform;
-		offset = transform.position - focus.position;
 
 		ChangeFocus(focus);
 	}
 
+	private void Update()
+	{
+		Vector3 desiredPosition = new Vector3(actualFocus.position.x, actualFocus.position.y, transform.position.z);
+		Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref cameraVelocity, DampTime);
+		transform.position = smoothedPosition;
+	}
+
 	public void ChangeFocus(Transform newFocus)
 	{
-		var position = newFocus.position;
-		transform.position = new Vector3(position.x, position.y, transform.position.z);
+		actualFocus = newFocus;
 	}
 }

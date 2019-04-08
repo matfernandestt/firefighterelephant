@@ -6,4 +6,5 @@ public class Stair : MonoBehaviour
 {
 	public Stair UpStair;
 	public Stair DownStair;
+	public Transform Room;
 }
