@@ -98,6 +98,7 @@
     <Compile Include="Assets\Anima2D\Scripts\Editor\IkUtils.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\IndexedEdge.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\InspectorEditor.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\Editor\KeyframeUtility.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\MaskCreator.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\MeshToolEditor.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\Node.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshEditor.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshEditorWindow.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshInstanceEditor.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshInstancePostProcessor.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshPostprocessor.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\SpriteMeshUtils.cs" />
     <Compile Include="Assets\Anima2D\Scripts\Editor\TextureEditorWindow.cs" />

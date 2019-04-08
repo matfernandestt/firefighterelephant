@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\CanvasController.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\Civilian.cs" />
+    <Compile Include="Assets\Scripts\CivilianAnimations.cs" />
     <Compile Include="Assets\Scripts\DynamicObjects.cs" />
     <Compile Include="Assets\Scripts\Extinguisher.cs" />
     <Compile Include="Assets\Scripts\ExtinguisherIcon.cs" />
